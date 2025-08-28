@@ -10,6 +10,7 @@ const balance = document.getElementById("balance");
 const barChart = document.getElementById("bar-chart");
 const pieChart = document.getElementById("pie-chart");
 const themeToggle = document.getElementById("theme-toggle");
+const formError = document.getElementById("form-error");
 
 // Transactions state
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
@@ -51,8 +52,19 @@ function render() {
 // Add transaction
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  formError.textContent = ""; // Clear previous error
+
+  const amountValue = amountInput.value.trim();
+  const amount = parseFloat(amountValue);
+
+  if (!amountValue || isNaN(amount) || amount <= 0) {
+    formError.textContent = "Please enter a valid positive number for amount.";
+    amountInput.focus();
+    return;
+  }
+
   const transaction = {
-    amount: parseFloat(amountInput.value),
+    amount: amount,
     description: descInput.value,
     category: categoryInput.value,
   };

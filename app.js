@@ -84,13 +84,42 @@ function updateCharts(income, expense) {
   // Bar chart
   barChart.innerHTML = "";
   const values = [income, expense];
+  const labels = ["Income", "Expense"];
+  const maxBarHeight = 160; // px, matches your CSS
+  const minBarHeight = 30;  // px, for visibility
   const maxVal = Math.max(...values, 100); // scaling
+
   values.forEach((val, i) => {
+    const group = document.createElement("div");
+    group.className = "bar-group";
+
+    // Value label
+    const valueLabel = document.createElement("div");
+    valueLabel.className = "bar-value";
+    valueLabel.textContent = `₹${val}`;
+    group.appendChild(valueLabel);
+
+    // Bar
     const bar = document.createElement("div");
-    bar.classList.add("bar");
-    bar.style.height = (val / maxVal) * 180 + "px";
-    bar.style.background = i === 0 ? "var(--income)" : "var(--expense)";
-    barChart.appendChild(bar);
+    bar.className = "bar " + (i === 0 ? "income" : "expense");
+    // Calculate proportional height, but clamp to maxBarHeight
+    let barHeight = minBarHeight;
+    if (maxVal > 0) {
+      barHeight = Math.max(
+        minBarHeight,
+        Math.round((val / maxVal) * maxBarHeight)
+      );
+    }
+    bar.style.height = barHeight + "px";
+    group.appendChild(bar);
+
+    // Label
+    const label = document.createElement("div");
+    label.className = "bar-label";
+    label.textContent = labels[i];
+    group.appendChild(label);
+
+    barChart.appendChild(group);
   });
 
   // Pie chart

@@ -46,6 +46,7 @@ function render() {
   balance.textContent = `₹${income - expense}`;
 
   updateCharts(income, expense);
+  renderCategoryBreakdown();
   localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
@@ -129,6 +130,56 @@ function updateCharts(income, expense) {
     var(--income) 0% ${incomePercent}%,
     var(--expense) ${incomePercent}% 100%
   )`;
+}
+
+function renderCategoryBreakdown() {
+  const categoryList = document.getElementById("category-list");
+  const categoryBarChart = document.getElementById("category-bar-chart");
+  if (!categoryList || !categoryBarChart) return;
+
+  // Aggregate totals per category
+  const catTotals = {};
+  let maxAmount = 0;
+  transactions.forEach(t => {
+    if (!catTotals[t.category]) catTotals[t.category] = 0;
+    catTotals[t.category] += t.amount;
+    if (catTotals[t.category] > maxAmount) maxAmount = catTotals[t.category];
+  });
+
+  // List view
+  categoryList.innerHTML = "";
+  Object.entries(catTotals).forEach(([cat, amt]) => {
+    const item = document.createElement("div");
+    item.className = "category-item";
+    item.innerHTML = `
+      <span class="cat-label">${cat.charAt(0).toUpperCase() + cat.slice(1)}</span>
+      <span class="cat-amount">₹${amt}</span>
+    `;
+    categoryList.appendChild(item);
+  });
+
+  // Bar chart view
+  categoryBarChart.innerHTML = "";
+  Object.entries(catTotals).forEach(([cat, amt]) => {
+    const row = document.createElement("div");
+    row.className = "cat-bar-row";
+    const label = document.createElement("span");
+    label.className = "cat-bar-label";
+    label.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+
+    const bar = document.createElement("div");
+    bar.className = "cat-bar " + (cat === "income" ? "income" : "expense");
+    bar.style.width = maxAmount > 0 ? `${(amt / maxAmount) * 70 + 30}%` : "30%";
+
+    const amount = document.createElement("span");
+    amount.className = "cat-bar-amount";
+    amount.textContent = `₹${amt}`;
+
+    row.appendChild(label);
+    row.appendChild(bar);
+    row.appendChild(amount);
+    categoryBarChart.appendChild(row);
+  });
 }
 
 // Theme toggle

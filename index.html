@@ -7,74 +7,79 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div class="header-left">
-      <h1>💰 FinTrack</h1>
-      <nav class="nav-links">
-        <!-- Example nav links for future expansion -->
-        <!-- <a href="#">Dashboard</a>
-        <a href="#">Reports</a>
-        <a href="#">Settings</a> -->
-      </nav>
-    </div>
-    <button id="theme-toggle">🌙</button>
-  </header>
-
-  <!-- Dashboard Summary -->
-  <section id="summary">
-    <div class="card">
-      <h3>Income</h3>
-      <p id="total-income">₹0</p>
-    </div>
-    <div class="card">
-      <h3>Expense</h3>
-      <p id="total-expense">₹0</p>
-    </div>
-    <div class="card">
-      <h3>Balance</h3>
-      <p id="balance">₹0</p>
-    </div>
-  </section>
-
-  <!-- Add Transaction Form -->
-  <section id="add-transaction">
-    <h2>Add Transaction</h2>
-    <form id="transaction-form">
-      <input type="text" id="amount" placeholder="Amount (₹)" autocomplete="off" />
-      <input type="text" id="description" placeholder="Description" required />
-      <select id="category">
-        <option value="income">Income</option>
-        <option value="food">Food</option>
-        <option value="travel">Travel</option>
-        <option value="shopping">Shopping</option>
-        <option value="other">Other</option>
-      </select>
-      <button type="submit">Add</button>
-    </form>
-    <div id="form-error" class="form-error"></div>
-  </section>
-
-  <!-- Transaction List -->
-  <section id="transactions">
-    <h2>Transactions</h2>
-    <ul id="transaction-list"></ul>
-  </section>
-
-  <!-- Charts -->
-  <section id="charts">
-    <h2>Spending Overview</h2>
-    <div class="chart-container">
-      <div id="bar-chart" class="chart"></div>
-      <div>
-        <div id="pie-chart" class="pie"></div>
-        <div class="pie-legend">
-          <span><span class="legend-dot income-dot"></span> Income</span>
-          <span><span class="legend-dot expense-dot"></span> Expense</span>
+  <div class="main-layout">
+    <aside class="sidebar">
+      <h1 class="logo">💰<span>FinTrack</span></h1>
+      <button id="theme-toggle" class="sidebar-theme-toggle">🌙</button>
+    </aside>
+    
+    <main class="content-grid">
+      <div class="summary-strip">
+        <div class="summary-item">
+          <div class="summary-label">Balance</div>
+          <div class="summary-value" id="balance">₹0</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Income</div>
+          <div class="summary-value income" id="total-income">₹0</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Expense</div>
+          <div class="summary-value expense" id="total-expense">₹0</div>
         </div>
       </div>
-    </div>
-  </section>
 
+      <div class="main-content">
+        <section class="left-column">
+          <div class="form-card">
+            <h2>Add Transaction</h2>
+            <form id="transaction-form">
+              <div class="form-row">
+                <input type="text" id="amount" placeholder="Amount (₹)" autocomplete="off" />
+                <input type="text" id="description" placeholder="Description" required />
+                <select id="category">
+                  <option value="income">Income</option>
+                  <option value="food">Food</option>
+                  <option value="travel">Travel</option>
+                  <option value="shopping">Shopping</option>
+                  <option value="other">Other</option>
+                </select>
+                <button type="submit">Add</button>
+              </div>
+            </form>
+            <div id="form-error" class="form-error"></div>
+          </div>
+          
+          <div class="transactions-card">
+            <h2>Transactions</h2>
+            <ul id="transaction-list"></ul>
+          </div>
+        </section>
+
+        <section class="right-column">
+          <div class="charts-card">
+            <h2>Spending Overview</h2>
+            <div class="chart-container">
+              <div id="bar-chart" class="chart"></div>
+              <div class="pie-container">
+                <div id="pie-chart" class="pie"></div>
+                <div class="pie-legend">
+                  <span><span class="legend-dot income-dot"></span>Income</span>
+                  <span><span class="legend-dot expense-dot"></span>Expense</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="breakdown-card">
+            <h2>Category Breakdown</h2>
+            <div id="category-list"></div>
+            <div id="category-bar-chart"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
   <script src="app.js"></script>
 </body>
 </html>

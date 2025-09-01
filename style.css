@@ -424,6 +424,116 @@ body.dark .pie-legend {
   border: 2px solid #fecaca;
 }
 
+/* Category Breakdown */
+#category-breakdown {
+  padding: 2rem 2.5rem 2rem 2.5rem;
+  margin-top: 1.5rem;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid #e5e7eb;
+}
+
+#category-breakdown h2 {
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+#category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.category-item {
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-weight: 500;
+  color: var(--text);
+  min-width: 120px;
+  box-shadow: 0 2px 8px rgba(36, 42, 66, 0.07);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.category-item .cat-label {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+.category-item .cat-amount {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+#category-bar-chart {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cat-bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.7rem;
+  gap: 1rem;
+}
+.cat-bar-label {
+  width: 90px;
+  font-size: 1rem;
+  color: #64748b;
+  text-align: right;
+  flex-shrink: 0;
+}
+.cat-bar {
+  height: 18px;
+  border-radius: 9px;
+  background: var(--primary-gradient);
+  transition: width 0.4s;
+  min-width: 10px;
+  box-shadow: 0 1px 6px #2563eb22;
+}
+.cat-bar.income {
+  background: linear-gradient(90deg, var(--income) 60%, #bbf7d0 100%);
+}
+.cat-bar.expense {
+  background: linear-gradient(90deg, var(--expense) 60%, #fecaca 100%);
+}
+.cat-bar-amount {
+  margin-left: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+body.dark #category-breakdown {
+  background: var(--card-bg);
+  border: 1px solid #334155;
+}
+body.dark .category-item {
+  background: #232a38;
+  color: var(--text);
+  border: 1px solid #334155;
+}
+body.dark .cat-bar-label {
+  color: #cbd5e1;
+}
+body.dark .cat-bar {
+  box-shadow: 0 1px 6px #2563eb44;
+}
+body.dark .cat-bar.income {
+  background: linear-gradient(90deg, var(--income) 60%, #134e4a 100%);
+}
+body.dark .cat-bar.expense {
+  background: linear-gradient(90deg, var(--expense) 60%, #7f1d1d 100%);
+}
+body.dark .cat-bar-amount {
+  color: #e0e7ef;
+}
+
 /* Dark Mode Variables */
 body.dark {
   --bg: #181e29;

@@ -46,6 +46,7 @@ function render() {
   balance.textContent = `₹${income - expense}`;
 
   updateCharts(income, expense);
+  renderCategoryBreakdown();
   localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
@@ -131,6 +132,56 @@ function updateCharts(income, expense) {
   )`;
 }
 
+function renderCategoryBreakdown() {
+  const categoryList = document.getElementById("category-list");
+  const categoryBarChart = document.getElementById("category-bar-chart");
+  if (!categoryList || !categoryBarChart) return;
+
+  // Aggregate totals per category
+  const catTotals = {};
+  let maxAmount = 0;
+  transactions.forEach(t => {
+    if (!catTotals[t.category]) catTotals[t.category] = 0;
+    catTotals[t.category] += t.amount;
+    if (catTotals[t.category] > maxAmount) maxAmount = catTotals[t.category];
+  });
+
+  // List view
+  categoryList.innerHTML = "";
+  Object.entries(catTotals).forEach(([cat, amt]) => {
+    const item = document.createElement("div");
+    item.className = "category-item";
+    item.innerHTML = `
+      <span class="cat-label">${cat.charAt(0).toUpperCase() + cat.slice(1)}</span>
+      <span class="cat-amount">₹${amt}</span>
+    `;
+    categoryList.appendChild(item);
+  });
+
+  // Bar chart view
+  categoryBarChart.innerHTML = "";
+  Object.entries(catTotals).forEach(([cat, amt]) => {
+    const row = document.createElement("div");
+    row.className = "cat-bar-row";
+    const label = document.createElement("span");
+    label.className = "cat-bar-label";
+    label.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+
+    const bar = document.createElement("div");
+    bar.className = "cat-bar " + (cat === "income" ? "income" : "expense");
+    bar.style.width = maxAmount > 0 ? `${(amt / maxAmount) * 70 + 30}%` : "30%";
+
+    const amount = document.createElement("span");
+    amount.className = "cat-bar-amount";
+    amount.textContent = `₹${amt}`;
+
+    row.appendChild(label);
+    row.appendChild(bar);
+    row.appendChild(amount);
+    categoryBarChart.appendChild(row);
+  });
+}
+
 // Theme toggle
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
@@ -139,3 +190,40 @@ themeToggle.addEventListener("click", () => {
 
 // Init
 render();
+
+// Clerk authentication logic
+window.addEventListener("DOMContentLoaded", async () => {
+  if (!window.Clerk) {
+    alert("Clerk failed to load. Please check your internet connection or Clerk configuration.");
+    return;
+  }
+  await window.Clerk.load();
+
+  const signIn = document.getElementById("sign-in");
+  const userButton = document.getElementById("user-button");
+  const appRoot = document.getElementById("app-root");
+
+  window.Clerk.addListener(({ user }) => {
+    if (user) {
+      signIn.style.display = "none";
+      userButton.style.display = "block";
+      appRoot.style.display = "block";
+      render();
+    } else {
+      signIn.style.display = "block";
+      userButton.style.display = "none";
+      appRoot.style.display = "none";
+    }
+  });
+
+  if (window.Clerk.user) {
+    signIn.style.display = "none";
+    userButton.style.display = "block";
+    appRoot.style.display = "block";
+    render();
+  } else {
+    signIn.style.display = "block";
+    userButton.style.display = "none";
+    appRoot.style.display = "none";
+  }
+});

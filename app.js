@@ -86,7 +86,7 @@ function updateCharts(income, expense) {
   barChart.innerHTML = "";
   const values = [income, expense];
   const labels = ["Income", "Expense"];
-  const maxBarHeight = 160; // px, matches your CSS
+  const maxBarHeight = 120; // px, slightly less than container for padding
   const minBarHeight = 30;  // px, for visibility
   const maxVal = Math.max(...values, 100); // scaling
 
@@ -103,12 +103,12 @@ function updateCharts(income, expense) {
     // Bar
     const bar = document.createElement("div");
     bar.className = "bar " + (i === 0 ? "income" : "expense");
-    // Calculate proportional height, but clamp to maxBarHeight
+    // Clamp bar height to maxBarHeight
     let barHeight = minBarHeight;
     if (maxVal > 0) {
       barHeight = Math.max(
         minBarHeight,
-        Math.round((val / maxVal) * maxBarHeight)
+        Math.min(Math.round((val / maxVal) * maxBarHeight), maxBarHeight)
       );
     }
     bar.style.height = barHeight + "px";

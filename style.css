@@ -1,5 +1,5 @@
 /* Reset and Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 :root {
   --bg: #f8fafc;
@@ -23,171 +23,465 @@ body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.5;
-}
-
-/* Layout */
-.app-container {
-  display: flex;
   min-height: 100vh;
 }
 
-/* Sidebar */
-.sidebar {
-  width: 240px;
-  background: var(--card-bg);
-  padding: 1.5rem;
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: 600;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0 1rem 0;
+  background: none;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
   color: var(--primary);
 }
 
-/* Main Content */
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  max-height: 100vh;
-  overflow: hidden;
+#theme-toggle {
+  background: var(--primary-gradient);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #6366f122;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+#theme-toggle:hover {
+  background: #38bdf8;
+  color: #1e293b;
+  transform: scale(1.1);
 }
 
-/* Summary Bar */
-.summary-bar {
+main {
+  width: 100%;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.summary {
   display: flex;
   gap: 2rem;
-  padding: 1rem 1.5rem;
+  justify-content: center;
   background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  padding: 1.5rem 0;
 }
 
-.summary-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.summary-item .label {
-  font-size: 0.875rem;
+.summary-label {
+  font-size: 0.95rem;
   color: #64748b;
+  margin-bottom: 0.2rem;
+  text-align: center;
 }
-
-.summary-item .value {
-  font-size: 1.25rem;
-  font-weight: 600;
+.summary-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
 }
+.summary-value.income { color: var(--income); }
+.summary-value.expense { color: var(--expense); }
 
-.value.income { color: var(--income); }
-.value.expense { color: var(--expense); }
-
-/* Content Grid */
-.content-grid {
+.main-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  padding: 1.5rem;
-  overflow: auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
-.column {
+.left-panel, .right-panel {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
-/* Cards */
 .card {
   background: var(--card-bg);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  border: 1px solid var(--border);
+  border-radius: 1rem;
   box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  min-height: 180px;
 }
 
 .card h2 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--primary);
   margin-bottom: 1rem;
 }
 
-/* Form Styling */
 form {
-  display: grid;
-  gap: 0.75rem;
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 input, select {
-  padding: 0.5rem;
+  padding: 0.7rem 1rem;
+  border-radius: 7px;
   border: 1px solid var(--border);
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
+  background: #f1f5f9;
+  transition: border 0.2s;
 }
 
-button {
-  padding: 0.5rem 1rem;
+input:focus, select:focus {
+  border: 1.5px solid var(--primary);
+  outline: none;
+}
+
+button[type="submit"] {
   background: var(--primary-gradient);
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 0.375rem;
   cursor: pointer;
-  font-weight: 500;
+  padding: 0.7rem 1.5rem;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.07);
+  transition: background 0.2s, transform 0.2s;
+}
+button[type="submit"]:hover {
+  background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
+  transform: scale(1.04);
 }
 
-/* Transactions */
-.transactions {
-  flex: 1;
-  overflow: hidden;
+.form-error {
+  color: #f43f5e;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  min-height: 1.2em;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.transactions-card {
+  max-height: 320px;
+  overflow-y: auto;
 }
 
 #transaction-list {
   list-style: none;
-  overflow-y: auto;
-  max-height: calc(100vh - 300px);
+  padding: 0;
+  margin: 0;
 }
 
-/* Charts */
-.charts-container {
+#transaction-list li {
   display: flex;
-  gap: 1.5rem;
-  height: 200px;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-bg);
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.7rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.07);
+  font-size: 1rem;
+  border: 1px solid #e5e7ef;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+#transaction-list li:hover {
+  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.13);
+  transform: translateY(-2px) scale(1.01);
 }
 
-#bar-chart {
-  flex: 3;
-}
-
-.pie-wrapper {
-  flex: 2;
+.transaction-left {
   display: flex;
-  flex-direction: column;
+  gap: 0.9rem;
   align-items: center;
 }
 
+.transaction-left .symbol {
+  font-size: 1.3rem;
+  opacity: 0.8;
+}
+
+.amount {
+  font-weight: bold;
+  color: var(--income);
+  font-size: 1.1rem;
+}
+
+.expense .amount {
+  color: var(--expense);
+}
+
+.desc {
+  color: var(--text);
+  opacity: 0.85;
+  font-size: 1rem;
+}
+
+.transaction-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.category {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 0.2rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--expense);
+  transition: transform 0.2s, color 0.2s;
+  padding: 0.2rem 0.4rem;
+}
+.delete-btn:hover {
+  transform: scale(1.2) rotate(-10deg);
+  color: #be123c;
+}
+
+/* Charts */
+.chart-card {
+  min-height: 220px;
+}
+
+.charts-flex {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+#bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  height: 180px; /* Increased height */
+  max-height: 180px;
+  width: 220px;  /* Slightly wider for labels */
+  border-radius: 16px;
+  background: #f1f5f9;
+  padding: 1.5rem 1rem 1rem 1rem; /* Extra top padding for value labels */
+  overflow: visible; /* Allow labels to show */
+  position: relative;
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  width: 60px;
+  position: relative;
+}
+
+.bar {
+  width: 32px;
+  background: linear-gradient(180deg, var(--primary-gradient), rgba(255,255,255,0.08));
+  border-radius: 10px 10px 6px 6px;
+  transition: height 0.3s;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bar.income {
+  background: linear-gradient(180deg, var(--income) 60%, #bbf7d0 100%);
+}
+.bar.expense {
+  background: linear-gradient(180deg, var(--expense) 60%, #fecaca 100%);
+}
+
+.bar-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+  text-shadow: 0 1px 4px #fff8;
+  text-align: center;
+  max-width: 60px;
+  word-break: break-all;
+}
+
+.bar-label {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #64748b;
+  letter-spacing: 0.2px;
+}
+
+#pie-chart {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--income) 0% 50%,
+    var(--expense) 50% 100%
+  );
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.13);
+  border: 2px solid #e5e7ef;
+  margin: 0 auto;
+  position: relative;
+}
+
+.legend {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+.dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+.income-dot {
+  background: var(--income);
+  border: 2px solid #bbf7d0;
+}
+.expense-dot {
+  background: var(--expense);
+  border: 2px solid #fecaca;
+}
+
+/* Category Breakdown */
+.breakdown-card {
+  min-height: 180px;
+}
+
+#category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.category-item {
+  background: #f1f5f9;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  color: var(--text);
+  min-width: 90px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.07);
+  border: 1px solid #e0e7ef;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.category-item .cat-label {
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+.category-item .cat-amount {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+#category-bar-chart {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.cat-bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  gap: 0.7rem;
+}
+.cat-bar-label {
+  width: 70px;
+  font-size: 0.95rem;
+  color: #64748b;
+  text-align: right;
+  flex-shrink: 0;
+}
+.cat-bar {
+  height: 14px;
+  border-radius: 7px;
+  background: var(--primary-gradient);
+  transition: width 0.4s;
+  min-width: 10px;
+}
+.cat-bar.income {
+  background: linear-gradient(90deg, var(--income) 60%, #bbf7d0 100%);
+}
+.cat-bar.expense {
+  background: linear-gradient(90deg, var(--expense) 60%, #fecaca 100%);
+}
+.cat-bar-amount {
+  margin-left: 0.7rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
 /* Responsive */
-@media (max-width: 1024px) {
-  .sidebar {
-    width: 80px;
-  }
-  
-  .content-grid {
+@media (max-width: 900px) {
+  .main-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .charts-flex {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  #bar-chart {
+    width: 100%;
+    height: 120px;
+  }
+  #pie-chart {
+    width: 80px;
+    height: 80px;
   }
 }
 
-@media (max-width: 768px) {
-  .app-container {
-    flex-direction: column;
+@media (max-width: 600px) {
+  .container {
+    padding: 0 0.2rem;
   }
-  
-  .sidebar {
-    width: 100%;
-    flex-direction: row;
+  header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0 0.5rem 0;
+  }
+  .summary {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0.5rem;
+  }
+  .main-grid {
+    gap: 1rem;
+  }
+  .card {
     padding: 1rem;
   }
 }

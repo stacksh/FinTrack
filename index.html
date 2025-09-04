@@ -7,85 +7,72 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app-container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h1 class="logo">💰 FinTrack</h1>
+  <div class="container">
+    <header>
+      <h1>💰 FinTrack</h1>
       <button id="theme-toggle">🌙</button>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Top Summary Bar -->
-      <div class="summary-bar">
-        <div class="summary-item">
-          <span class="label">Balance</span>
-          <span class="value" id="balance">₹0</span>
-        </div>
-        <div class="summary-item">
-          <span class="label">Income</span>
-          <span class="value income" id="total-income">₹0</span>
-        </div>
-        <div class="summary-item">
-          <span class="label">Expense</span>
-          <span class="value expense" id="total-expense">₹0</span>
-        </div>
-      </div>
-
-      <!-- Two Column Layout -->
-      <div class="content-grid">
-        <!-- Left Column -->
-        <div class="column">
-          <!-- Add Transaction Form -->
-          <div class="card">
-            <h2>Add Transaction</h2>
-            <form id="transaction-form">
-              <input type="text" id="amount" placeholder="Amount (₹)" autocomplete="off" />
-              <input type="text" id="description" placeholder="Description" required />
-              <select id="category">
-                <option value="income">Income</option>
-                <option value="food">Food</option>
-                <option value="travel">Travel</option>
-                <option value="shopping">Shopping</option>
-                <option value="other">Other</option>
-              </select>
-              <button type="submit">Add</button>
-            </form>
-            <div id="form-error" class="form-error"></div>
+    </header>
+    <main>
+      <section class="dashboard">
+        <div class="summary">
+          <div>
+            <div class="summary-label">Balance</div>
+            <div class="summary-value" id="balance">₹0</div>
           </div>
-
-          <!-- Transactions List -->
-          <div class="card transactions">
-            <h2>Transactions</h2>
-            <ul id="transaction-list"></ul>
+          <div>
+            <div class="summary-label">Income</div>
+            <div class="summary-value income" id="total-income">₹0</div>
+          </div>
+          <div>
+            <div class="summary-label">Expense</div>
+            <div class="summary-value expense" id="total-expense">₹0</div>
           </div>
         </div>
-
-        <!-- Right Column -->
-        <div class="column">
-          <!-- Charts -->
-          <div class="card">
-            <h2>Overview</h2>
-            <div class="charts-container">
-              <div id="bar-chart"></div>
-              <div class="pie-wrapper">
-                <div id="pie-chart"></div>
-                <div class="legend">
-                  <span><span class="dot income-dot"></span>Income</span>
-                  <span><span class="dot expense-dot"></span>Expense</span>
+        <div class="main-grid">
+          <div class="left-panel">
+            <div class="card">
+              <h2>Add Transaction</h2>
+              <form id="transaction-form">
+                <input type="text" id="amount" placeholder="Amount (₹)" autocomplete="off" />
+                <input type="text" id="description" placeholder="Description" required />
+                <select id="category">
+                  <option value="income">Income</option>
+                  <option value="food">Food</option>
+                  <option value="travel">Travel</option>
+                  <option value="shopping">Shopping</option>
+                  <option value="other">Other</option>
+                </select>
+                <button type="submit">Add</button>
+              </form>
+              <div id="form-error" class="form-error"></div>
+            </div>
+            <div class="card transactions-card">
+              <h2>Transactions</h2>
+              <ul id="transaction-list"></ul>
+            </div>
+          </div>
+          <div class="right-panel">
+            <div class="card chart-card">
+              <h2>Overview</h2>
+              <div class="charts-flex">
+                <div id="bar-chart"></div>
+                <div>
+                  <div id="pie-chart"></div>
+                  <div class="legend">
+                    <span><span class="dot income-dot"></span>Income</span>
+                    <span><span class="dot expense-dot"></span>Expense</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <!-- Category Breakdown -->
-          <div class="card">
-            <h2>Category Breakdown</h2>
-            <div id="category-list"></div>
-            <div id="category-bar-chart"></div>
+            <div class="card breakdown-card">
+              <h2>Category Breakdown</h2>
+              <div id="category-list"></div>
+              <div id="category-bar-chart"></div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   </div>
   <script src="app.js"></script>

@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FinTrack</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .card {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(99, 102, 241, 0.08);
+  border: 1.5px solid #e0e7ef;
+  padding: 1.5rem;
+  min-height: 180px;
+  transition: box-shadow 0.2s, border 0.2s, transform 0.2s;
+}
+.card:hover {
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.13);
+  border: 2px solid var(--primary);
+  transform: translateY(-2px) scale(1.01);
+}
+  </style>
 </head>
 <body>
   <div class="container">

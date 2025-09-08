@@ -77,10 +77,11 @@ main {
   display: flex;
   gap: 2rem;
   justify-content: center;
-  background: var(--card-bg);
+  background: linear-gradient(90deg, #f1f5f9 60%, #e0e7ff 100%);
   border-radius: 1rem;
   box-shadow: var(--shadow);
   padding: 1.5rem 0;
+  border: 1.5px solid #e0e7ef;
 }
 
 .summary-label {
@@ -120,10 +121,11 @@ main {
 }
 
 .card h2 {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--primary);
   margin-bottom: 1rem;
+  letter-spacing: 0.5px;
 }
 
 form {
@@ -136,15 +138,15 @@ form {
 input, select {
   padding: 0.7rem 1rem;
   border-radius: 7px;
-  border: 1px solid var(--border);
+  border: 1.5px solid #c7d2fe;
   font-size: 1rem;
   background: #f1f5f9;
-  transition: border 0.2s;
+  transition: border 0.2s, background 0.2s;
 }
 
 input:focus, select:focus {
   border: 1.5px solid var(--primary);
-  outline: none;
+  background: #e0e7ff;
 }
 
 button[type="submit"] {
@@ -199,6 +201,7 @@ button[type="submit"]:hover {
 }
 #transaction-list li:hover {
   box-shadow: 0 6px 18px rgba(99, 102, 241, 0.13);
+  border: 1.5px solid var(--primary);
   transform: translateY(-2px) scale(1.01);
 }
 
@@ -279,7 +282,9 @@ button[type="submit"]:hover {
   max-height: 180px;
   width: 220px;  /* Slightly wider for labels */
   border-radius: 16px;
-  background: #f1f5f9;
+  background: linear-gradient(135deg, #f1f5f9 70%, #e0e7ff 100%);
+  border: 1.5px solid #e0e7ef;
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.07);
   padding: 1.5rem 1rem 1rem 1rem; /* Extra top padding for value labels */
   overflow: visible; /* Allow labels to show */
   position: relative;
@@ -341,8 +346,8 @@ button[type="submit"]:hover {
     var(--income) 0% 50%,
     var(--expense) 50% 100%
   );
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.13);
-  border: 2px solid #e5e7ef;
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.13), 0 1px 8px #fff4 inset;
+  border: 2px solid #e0e7ef;
   margin: 0 auto;
   position: relative;
 }
@@ -351,13 +356,13 @@ button[type="submit"]:hover {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #64748b;
 }
 .dot {
   display: inline-block;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   margin-right: 0.5em;
   vertical-align: middle;

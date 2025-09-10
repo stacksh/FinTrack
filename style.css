@@ -13,6 +13,18 @@
   --shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
+body.dark {
+  --bg: #181e29;
+  --text: #e0e7ef;
+  --card-bg: #232a38;
+  --primary: #38bdf8;
+  --primary-gradient: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
+  --expense: #fb7185;
+  --income: #4ade80;
+  --border: #334155;
+  --shadow: 0 4px 24px rgba(20, 24, 40, 0.25);
+}
+
 * {
   margin: 0;
   padding: 0;

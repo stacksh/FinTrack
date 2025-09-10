@@ -12,6 +12,30 @@ const pieChart = document.getElementById("pie-chart");
 const themeToggle = document.getElementById("theme-toggle");
 const formError = document.getElementById("form-error");
 
+// Theme toggle logic
+function setThemeIcon() {
+  themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+}
+
+function applyThemeFromStorage() {
+  const savedTheme = localStorage.getItem("fintrack-theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+  }
+  setThemeIcon();
+}
+
+if (themeToggle) {
+  applyThemeFromStorage();
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    localStorage.setItem("fintrack-theme", document.body.classList.contains("dark") ? "dark" : "light");
+    setThemeIcon();
+  });
+}
+
 // Transactions state
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 

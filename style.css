@@ -1,28 +1,30 @@
-/* Reset and Fonts */
+/* Modern Glassmorphism & Gradient Theme */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 :root {
-  --bg: #f8fafc;
-  --text: #1e293b;
-  --card-bg: #fff;
+  --bg: linear-gradient(120deg, #f8fafc 60%, #e0e7ff 100%);
+  --text: #23272f;
+  --card-bg: rgba(255,255,255,0.85);
   --primary: #6366f1;
   --primary-gradient: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
   --expense: #f43f5e;
   --income: #22c55e;
   --border: #e5e7eb;
-  --shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  --shadow: 0 8px 32px rgba(99, 102, 241, 0.10);
+  --blur: 16px;
 }
 
 body.dark {
-  --bg: #181e29;
+  --bg: linear-gradient(120deg, #181e29 60%, #232a38 100%);
   --text: #e0e7ef;
-  --card-bg: #232a38;
+  --card-bg: rgba(51,65,85,0.85);
   --primary: #38bdf8;
   --primary-gradient: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
   --expense: #fb7185;
   --income: #4ade80;
   --border: #334155;
-  --shadow: 0 4px 24px rgba(20, 24, 40, 0.25);
+  --shadow: 0 8px 32px rgba(36, 42, 66, 0.18);
+  --blur: 18px;
 }
 
 * {
@@ -36,12 +38,14 @@ body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  transition: background 0.4s, color 0.3s;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+  backdrop-filter: blur(var(--blur));
 }
 
 header {
@@ -49,13 +53,20 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 2rem 0 1rem 0;
-  background: none;
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  border: 1.5px solid var(--border);
+  backdrop-filter: blur(var(--blur));
 }
 
 header h1 {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 2.2rem;
+  font-weight: 800;
   color: var(--primary);
+  letter-spacing: 1px;
+  text-shadow: 0 2px 12px #6366f144;
 }
 
 #theme-toggle {
@@ -63,16 +74,18 @@ header h1 {
   color: #fff;
   border: none;
   border-radius: 50%;
-  font-size: 1.5rem;
-  padding: 0.5rem 0.7rem;
+  font-size: 1.7rem;
+  padding: 0.6rem 1rem;
   cursor: pointer;
-  box-shadow: 0 2px 8px #6366f122;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
+  box-shadow: 0 4px 18px #6366f144;
+  transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
+
 #theme-toggle:hover {
   background: #38bdf8;
-  color: #1e293b;
-  transform: scale(1.1);
+  color: #23272f;
+  transform: scale(1.13) rotate(-8deg);
+  box-shadow: 0 8px 32px #38bdf844;
 }
 
 main {
@@ -89,11 +102,12 @@ main {
   display: flex;
   gap: 2rem;
   justify-content: center;
-  background: linear-gradient(90deg, #f1f5f9 60%, #e0e7ff 100%);
+  background: var(--card-bg);
   border-radius: 1rem;
   box-shadow: var(--shadow);
   padding: 1.5rem 0;
-  border: 1.5px solid #e0e7ef;
+  border: 1.5px solid var(--border);
+  backdrop-filter: blur(var(--blur));
 }
 
 .summary-label {
@@ -102,12 +116,14 @@ main {
   margin-bottom: 0.2rem;
   text-align: center;
 }
+
 .summary-value {
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--text);
   text-align: center;
 }
+
 .summary-value.income { color: var(--income); }
 .summary-value.expense { color: var(--expense); }
 
@@ -125,19 +141,28 @@ main {
 
 .card {
   background: var(--card-bg);
-  border-radius: 1rem;
+  border-radius: 1.2rem;
   box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  padding: 1.5rem;
+  border: 1.5px solid var(--border);
+  padding: 2rem 1.5rem;
   min-height: 180px;
+  backdrop-filter: blur(var(--blur));
+  transition: box-shadow 0.2s, border 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 12px 48px rgba(99, 102, 241, 0.18);
+  border: 2px solid var(--primary);
+  transform: translateY(-2px) scale(1.01);
 }
 
 .card h2 {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 800;
   color: var(--primary);
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   letter-spacing: 0.5px;
+  text-shadow: 0 2px 12px #6366f144;
 }
 
 form {
@@ -148,17 +173,19 @@ form {
 }
 
 input, select {
-  padding: 0.7rem 1rem;
-  border-radius: 7px;
+  padding: 0.9rem 1.2rem;
+  border-radius: 9px;
   border: 1.5px solid #c7d2fe;
-  font-size: 1rem;
+  font-size: 1.08rem;
   background: #f1f5f9;
-  transition: border 0.2s, background 0.2s;
+  transition: border 0.2s, background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px #6366f122;
 }
 
 input:focus, select:focus {
-  border: 1.5px solid var(--primary);
+  border: 2px solid var(--primary);
   background: #e0e7ff;
+  box-shadow: 0 4px 18px #6366f144;
 }
 
 button[type="submit"] {
@@ -166,20 +193,22 @@ button[type="submit"] {
   color: #fff;
   border: none;
   cursor: pointer;
-  padding: 0.7rem 1.5rem;
-  border-radius: 7px;
-  font-weight: 600;
-  font-size: 1rem;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.07);
-  transition: background 0.2s, transform 0.2s;
+  padding: 0.9rem 2rem;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 1.08rem;
+  box-shadow: 0 4px 18px #6366f144;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
+
 button[type="submit"]:hover {
   background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
-  transform: scale(1.04);
+  transform: scale(1.07);
+  box-shadow: 0 8px 32px #38bdf844;
 }
 
 .form-error {
-  color: #f43f5e;
+  color: var(--expense);
   margin-top: 0.5rem;
   font-size: 1rem;
   min-height: 1.2em;
@@ -190,6 +219,11 @@ button[type="submit"]:hover {
 .transactions-card {
   max-height: 320px;
   overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  border: 1.5px solid var(--border);
+  backdrop-filter: blur(var(--blur));
 }
 
 #transaction-list {
@@ -203,17 +237,19 @@ button[type="submit"]:hover {
   justify-content: space-between;
   align-items: center;
   background: var(--card-bg);
-  padding: 1rem 1.2rem;
+  padding: 1.1rem 1.4rem;
   margin-bottom: 0.7rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.07);
-  font-size: 1rem;
-  border: 1px solid #e5e7ef;
-  transition: box-shadow 0.2s, transform 0.2s;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.10);
+  font-size: 1.08rem;
+  border: 1.5px solid var(--border);
+  transition: box-shadow 0.2s, transform 0.2s, border 0.2s;
+  backdrop-filter: blur(var(--blur));
 }
+
 #transaction-list li:hover {
-  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.13);
-  border: 1.5px solid var(--primary);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.18);
+  border: 2px solid var(--primary);
   transform: translateY(-2px) scale(1.01);
 }
 
@@ -269,6 +305,7 @@ button[type="submit"]:hover {
   transition: transform 0.2s, color 0.2s;
   padding: 0.2rem 0.4rem;
 }
+
 .delete-btn:hover {
   transform: scale(1.2) rotate(-10deg);
   color: #be123c;
@@ -289,17 +326,18 @@ button[type="submit"]:hover {
 #bar-chart {
   display: flex;
   align-items: flex-end;
-  gap: 1rem;
-  height: 180px; /* Increased height */
-  max-height: 180px;
-  width: 220px;  /* Slightly wider for labels */
-  border-radius: 16px;
+  gap: 1.2rem;
+  height: 200px;
+  max-height: 200px;
+  width: 260px;
+  border-radius: 18px;
   background: linear-gradient(135deg, #f1f5f9 70%, #e0e7ff 100%);
-  border: 1.5px solid #e0e7ef;
-  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.07);
-  padding: 1.5rem 1rem 1rem 1rem; /* Extra top padding for value labels */
-  overflow: visible; /* Allow labels to show */
+  border: 1.5px solid var(--border);
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.10);
+  padding: 2rem 1.2rem 1.2rem 1.2rem;
+  overflow: visible;
   position: relative;
+  backdrop-filter: blur(var(--blur));
 }
 
 .bar-group {
@@ -308,89 +346,100 @@ button[type="submit"]:hover {
   align-items: center;
   justify-content: flex-end;
   height: 100%;
-  width: 60px;
+  width: 70px;
   position: relative;
 }
 
 .bar {
-  width: 32px;
+  width: 38px;
   background: linear-gradient(180deg, var(--primary-gradient), rgba(255,255,255,0.08));
-  border-radius: 10px 10px 6px 6px;
+  border-radius: 12px 12px 8px 8px;
   transition: height 0.3s;
   margin-bottom: 0.5rem;
   position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  box-shadow: 0 4px 18px #6366f122;
 }
 
 .bar.income {
   background: linear-gradient(180deg, var(--income) 60%, #bbf7d0 100%);
 }
+
 .bar.expense {
   background: linear-gradient(180deg, var(--expense) 60%, #fecaca 100%);
 }
 
 .bar-value {
-  font-size: 1rem;
+  font-size: 1.08rem;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 0.3rem;
   text-shadow: 0 1px 4px #fff8;
   text-align: center;
-  max-width: 60px;
+  max-width: 70px;
   word-break: break-all;
 }
 
 .bar-label {
   margin-top: 0.5rem;
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 600;
   color: #64748b;
   letter-spacing: 0.2px;
 }
 
 #pie-chart {
-  width: 110px;
-  height: 110px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   background: conic-gradient(
     var(--income) 0% 50%,
     var(--expense) 50% 100%
   );
-  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.13), 0 1px 8px #fff4 inset;
-  border: 2px solid #e0e7ef;
+  box-shadow: 0 12px 48px rgba(99, 102, 241, 0.18), 0 2px 16px #fff4 inset;
+  border: 2.5px solid var(--border);
   margin: 0 auto;
   position: relative;
+  backdrop-filter: blur(var(--blur));
 }
 
 .legend {
   display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-  font-size: 1rem;
+  gap: 2rem;
+  margin-top: 1.2rem;
+  font-size: 1.08rem;
   color: #64748b;
 }
+
 .dot {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   margin-right: 0.5em;
   vertical-align: middle;
-}
-.income-dot {
-  background: var(--income);
-  border: 2px solid #bbf7d0;
-}
-.expense-dot {
-  background: var(--expense);
-  border: 2px solid #fecaca;
+  box-shadow: 0 2px 8px #6366f122;
 }
 
-/* Category Breakdown */
+.income-dot {
+  background: var(--income);
+  border: 2.5px solid #bbf7d0;
+}
+
+.expense-dot {
+  background: var(--expense);
+  border: 2.5px solid #fecaca;
+}
+
 .breakdown-card {
   min-height: 180px;
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  border: 1.5px solid var(--border);
+  backdrop-filter: blur(var(--blur));
 }
 
 #category-list {
@@ -402,23 +451,32 @@ button[type="submit"]:hover {
 
 .category-item {
   background: #f1f5f9;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
+  border-radius: 10px;
+  padding: 0.7rem 1.2rem;
+  font-weight: 600;
   color: var(--text);
-  min-width: 90px;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.07);
-  border: 1px solid #e0e7ef;
+  min-width: 100px;
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.10);
+  border: 1.5px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  transition: box-shadow 0.2s, border 0.2s, transform 0.2s;
 }
+
+.category-item:hover {
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.18);
+  border: 2px solid var(--primary);
+  transform: translateY(-2px) scale(1.01);
+}
+
 .category-item .cat-label {
-  font-size: 0.95rem;
+  font-size: 1.08rem;
   margin-bottom: 0.2rem;
 }
+
 .category-item .cat-amount {
-  font-size: 1.05rem;
+  font-size: 1.12rem;
   font-weight: 700;
 }
 
@@ -434,6 +492,7 @@ button[type="submit"]:hover {
   margin-bottom: 0.5rem;
   gap: 0.7rem;
 }
+
 .cat-bar-label {
   width: 70px;
   font-size: 0.95rem;
@@ -441,6 +500,7 @@ button[type="submit"]:hover {
   text-align: right;
   flex-shrink: 0;
 }
+
 .cat-bar {
   height: 14px;
   border-radius: 7px;
@@ -448,12 +508,15 @@ button[type="submit"]:hover {
   transition: width 0.4s;
   min-width: 10px;
 }
+
 .cat-bar.income {
   background: linear-gradient(90deg, var(--income) 60%, #bbf7d0 100%);
 }
+
 .cat-bar.expense {
   background: linear-gradient(90deg, var(--expense) 60%, #fecaca 100%);
 }
+
 .cat-bar-amount {
   margin-left: 0.7rem;
   font-weight: 600;
@@ -468,16 +531,17 @@ button[type="submit"]:hover {
   }
   .charts-flex {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
     align-items: stretch;
   }
   #bar-chart {
     width: 100%;
     height: 120px;
+    max-width: 100%;
   }
   #pie-chart {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
   }
 }
 
@@ -492,13 +556,13 @@ button[type="submit"]:hover {
   }
   .summary {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
     padding: 1rem 0.5rem;
   }
   .main-grid {
-    gap: 1rem;
+    gap: 1.2rem;
   }
   .card {
-    padding: 1rem;
+    padding: 1.2rem;
   }
 }
